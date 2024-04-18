@@ -1,6 +1,7 @@
 let numTurns = 0;
 let numRedPieces = 2;
 let numBlackPieces = 2;
+let turn = 'red';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -37,19 +38,26 @@ const moveAsync = async(id) => {
     if(child.getAttribute('class') != 'red-piece-hover'){
         return
     }
+    if(turn == 'black'){
+        return
+    }
     document.getElementById(id).removeChild(child)
     redTurn(id)
     numTurns++;
     numRedPieces++;
     document.getElementById('red-score').innerHTML = numRedPieces.toString();
     document.getElementById('black-score').innerHTML = numBlackPieces.toString();
+    if (numTurns == 60){
+        computeWinner();
+    }
+    turn = 'black';
     document.getElementById('turn-text').innerHTML = "It is the opponent's turn";
     await delay(500)
     document.getElementById('turn-text').innerHTML = "It is the opponent's turn.";
     await delay(500)
     document.getElementById('turn-text').innerHTML = "It is the opponent's turn..";
     await delay(500)
-    document.getElementById('turn-text').innerHTML = "It is the opponent's turn..";
+    document.getElementById('turn-text').innerHTML = "It is the opponent's turn...";
     await delay(500)
     blackTurn()
     numTurns++;
@@ -58,8 +66,9 @@ const moveAsync = async(id) => {
     document.getElementById('red-score').innerHTML = numRedPieces.toString();
     document.getElementById('turn-text').innerHTML = 'It is your turn! Go ahead!';
     if (numTurns == 60){
-        let winner = computeWinner();
+        computeWinner();
     }
+    turn = 'red';
 }
 
 
