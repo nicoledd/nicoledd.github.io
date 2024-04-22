@@ -32,6 +32,7 @@ function move(id){
     moveAsync(id);
 }
 
+
 const moveAsync = async(id) => {
     const cell = document.getElementById(id);
     const child = cell.firstChild;
@@ -113,6 +114,9 @@ function blackTurn(){
         if (cell.firstChild.getAttribute('class') == 'black-piece'){
             continue;
         }
+        if (cell.firstChild.getAttribute('class') == 'red-piece-hover'){
+            continue;
+        }
         numRedPieces--;
         numBlackPieces++;
         document.getElementById(id).firstElementChild.setAttribute("class", "black-piece");
@@ -157,75 +161,65 @@ const computeWinner = async() => {
 
 
 
-
-
-
 function computeBlackMove(){
-    let probability = []
+    let numRed = []
+    numRed = computeNumRedForAllCells()
 
+    let maxNum = 0;
+    maxNum = computeMaxNum(numRed)
+
+    let allowedMoves = []
+    if(maxNum > 0){
+        for (let id=0; id<64; id++){
+            if(numRed[id] == maxNum){
+                allowedMoves.push(id)
+            }
+        }
+    }
+    else{
+        for(let id=0; id<64; id++){
+            cell = document.getElementById(id)
+            if (cell.childNodes.length > 0){
+                if(cell.firstChild.getAttribute('class') != 'black-piece' && cell.firstChild.getAttribute('class') != 'red-piece'){
+                    allowedMoves.push(id);
+                }
+            }
+            else if (cell.childNodes.length == 0){
+                allowedMoves.push(id);
+            }
+        }
+    }
+
+    let randNum = Math.floor(Math.random() * allowedMoves.length)
+    let retId = 0
+    retId = allowedMoves[randNum]
+    return retId
+}
+
+
+function computeNumRedForAllCells(){
+    let probability = []
     for(let id=0; id<64; id++){
         cell = document.getElementById(id);
         if (cell.childNodes.length > 0 && cell.firstChild.getAttribute('class') == 'black-piece'){
             probability.push(0)
-            continue
         }
-        if (cell.childNodes.length > 0 && cell.firstChild.getAttribute('class') == 'red-piece'){
+        else if (cell.childNodes.length > 0 && cell.firstChild.getAttribute('class') == 'red-piece'){
             probability.push(0)
-            continue
         }
-        let env = getSurroundingCells(id);
-        let numRedCells = getNumRedCells(env);
-        probability.push(numRedCells)
-    }
-    //let retId = sampleFromDistribution(probability);
-    let retId = 0;
-    let allMaxArr = []
-    let maxNum = 0;
-    for (let id=0; id<64; id++){
-        if(probability[id] > maxNum){
-            maxNum = probability[id]
+        else{
+            let env = getSurroundingCells(id);
+            let numRedCells = getNumRedCellsSurrounding(env);
+            probability.push(numRedCells)
         }
     }
-    for (let id=0; id<64; id++){
-        if(probability[id] == maxNum){
-            allMaxArr.push(id)
-        }
-    }
-    let min = 0
-    let max = allMaxArr.length-1
-    let randNum = Math.floor(Math.random() * (max - min + 1)) + min
-    retId = allMaxArr[randNum]
-    return retId
-}
+    return probability
 
-/*
-function sampleFromDistribution(arr){
-    let cumulative = [0]
-    let sum = 0
-    for (let i=0; i<arr.length; i++){
-        sum += arr[i]
-        cumulative.push(sum)
-    }
-    min = 0
-    max = cumulative[cumulative.length - 1]
-    let randNum = Math.random() * (max - min) + min;
-    let idx = computeRange(randNum,cumulative)
-    return idx
 }
 
 
-function computeRange(val, arr){
-    for (let i=0; i<arr.length; i++){
-        if (i == arr.length - 1){
-            return i
-        }
-        if(val >= arr[i] && val < arr[i+1]){
-            return i
-        }
-    }
-}*/
 
-function getNumRedCells(env){
+function getNumRedCellsSurrounding(env){
     let num = 0
     for(let i=0; i<env.length; i++){
         let id = env[i];
@@ -238,4 +232,15 @@ function getNumRedCells(env){
         }
     }
     return num
+}
+
+
+function computeMaxNum(numRed){
+    let maxNum = 0
+    for (let id=0; id<64; id++){
+        if(numRed[id] > maxNum){
+            maxNum = numRed[id]
+        }
+    }
+    return maxNum
 }
