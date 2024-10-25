@@ -1,0 +1,67 @@
+body{
+    padding-bottom: 200px;
+}
+.headerText {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    
+    /* vertical centering */
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 20%;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+
+.window{
+    background-color:rgb(218, 217, 197);
+    height: 700px;
+    width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    border-radius: 50px;
+}
+
+
+.girl{
+    background-color: cornsilk;
+    height: 600px;
+    width: 300px;
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.girl img{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+
+.closet{
+    background-color: rgb(120, 74, 74);
+    height: 600px;
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.box{
+    background-color: bisque;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+
+.box:hover{
+    transform: scale(1.1) perspective(1px)
+}

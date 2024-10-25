@@ -1,62 +1,24 @@
 <html>
 
-<style>
-.headerText {
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-  
-  /* vertical centering */
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 20%;
-}
-
-.funStuff{
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-  
-  /* vertical centering */
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 30%;
-}
-
-.gameButton {
-  transition-duration: 0.4s;
-  border: none;
-  color: black;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 14px;
-  height: 100%;
-  width: 50%;
-  font-weight: lighter;
-  font-family: 'Andale Mono',monospace;
-}
-
-.gameButton:hover {
-  transform: scale(1.1) perspective(1px)
-}
-</style>
-
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" /> 
+</head>
 
 <body>
   <div class="headerText" style="line-height: 1px;">
     <h1 style="font-weight: lighter; font-size:60px; font-family: 'Monaco', monospace;"><center>nicoledd<center></h1>
     <h3 style="font-weight: lighter; font-family: 'Andale Mono', monospace;"><center>small website under construction<center></h3>
   </div>
+  <div style="height:30px;">
+  </div>
 
   <div class="funStuff">
     <center>
-      <button onclick="window.location.href='switcheroo.html';" class="gameButton">Switcheroo</button>
+      <button onclick="window.location.href='switcheroo/switcheroo.html';" class="gameButton">Switcheroo</button>
+      <button onclick="window.location.href='dressup/dressup.html';" class="gameButton">Dressup</button>
+      <button onclick="window.location.href='vibes/vibes.html';" class="gameButton">Vibes</button>
+
     </center>
   </div>
 </body>

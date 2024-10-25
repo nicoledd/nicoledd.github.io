@@ -1,0 +1,40 @@
+.headerText {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 20%;
+  }
+  
+  .funStuff{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;  
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 30%;
+  }
+  
+  .gameButton {
+    transition-duration: 0.4s;
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 20px 2px;
+    border-radius: 14px;
+    height: 100px;
+    width: 50%;
+    font-weight: lighter;
+    font-family: 'Andale Mono',monospace;
+  }
+  
+  .gameButton:hover {
+    transform: scale(1.1) perspective(1px)
+  }
